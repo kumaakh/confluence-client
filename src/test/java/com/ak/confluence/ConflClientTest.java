@@ -21,6 +21,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.ak.confluence.client.ConflClient;
+import com.ak.confluence.client.page.PageBuilder;
 
 
 public class ConflClientTest {
@@ -61,10 +62,12 @@ public class ConflClientTest {
 	}
 	private String addPage(String parentID, String title, String content) throws Exception
 	{
-		String id=client.addPage(parentID, title, content);
 		rememberToDelete(title);
-		return id;
-		
+		return client.addPage(parentID, title, content);
+	}
+	private String addPage(String parentID, PageBuilder b) throws Exception
+	{
+		return addPage(parentID, b.getTitle(), b.toString());
 	}
 	@Test
 	public void testGetPageId() throws Exception {
@@ -135,5 +138,10 @@ public class ConflClientTest {
 		}
 		
 	}
-
+	
+	@Test
+	public void testPageConstruction() throws Exception {
+		String id=addPage(rootPage,PageBuilderTest.makeSimplePage());
+		assertThat(id,not(isEmptyOrNullString()));
+	}
 }

@@ -24,6 +24,7 @@ import org.json.JSONObject;
 import com.ak.atlassian.oauth.client.AtlassianOAuthClient;
 import com.ak.atlassian.oauth.client.LocalServerCallbackReciever;
 import com.ak.atlassian.oauth.client.TokenSecretVerifierHolder;
+import com.ak.confluence.client.page.PageBuilder;
 
 
 /**
@@ -136,7 +137,10 @@ public class ConflClient
         return page;
     }
     
-    
+    public String addPage(String parentId, PageBuilder builder) throws Exception
+    {
+    	return addPage(parentId,builder.getTitle(),builder.toString());
+    }
 	public String addPage(String parentId, String pageTitle, String bodyContent) throws Exception
     {
 		String url=contentURL();
