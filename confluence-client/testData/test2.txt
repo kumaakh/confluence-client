@@ -1,0 +1,119 @@
+<p>
+<p>
+<p>
+</p>
+<h3>Goal</h3>
+</p>
+<p>In outdoor environments, create a high quality (possibly long distance) bridge to the school WiFi network and create a local hotspot for DIY production.</p>
+<p>
+</p>
+<p>Relevant link:</p>
+<p>
+</p>
+<p>http://www.outsideourbubble.com/secure-private-rv-wi-fi-and-making-a-better-park-connection-for-under-100</p>
+<p>
+</p>
+<h3>Components</h3>
+<p>Ubiquiti NanoStation M &nbsp;(NSM2 US)</p>
+<p>Ubiquiti airGateway LR (AirGateway-LR)</p>
+<p>
+</p>
+<p>NanoStation M is a wireless CPE with an integrated high gain directional antenna. This will serve wireless connect to the wireless school network backbone.It also provides two local network ports for providing Ethernet connectivity.</p>
+<p>
+</p>
+<p>airGateway LR connects to NanoStation M and provides a local WiFi hotspot.</p>
+<p>
+</p>
+<p>This arrangement differs from the Engenius solution in that, two separate antennas (and equipment) gets used. A directed antennna (NanoStation M) to connect to the backend and a local router (airGateway) with omnidirectional for local access.</p>
+<p>
+</p>
+<h3>Setup</h3>
+<p>
+</p>
+<p>Here are snapshots for setup of the NanoStation M.</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+<p><a href='https://sites.google.com/a/mamigoinc.com/development/Home/Projects/cloudmomentz/ubiquiti-nanostation-outdoor-wifi/ubnt-wireless.png?attredirects=0' imageanchor='1'><img border='0' height='225' src='https://sites.google.com/a/mamigoinc.com/development/Home/Projects/cloudmomentz/ubiquiti-nanostation-outdoor-wifi/ubnt-wireless.png' width='400'/></a></p>
+
+</p>
+<p>
+<h3>Steps</h3>
+
+</p>
+<p>
+<p>1. Ubiquiti (Main port) -&gt; Ubiquiti Injector - POE Port. Ubiquiti Injector - LAN Port -&gt; Laptop</p>
+<p>2. Set laptop to static IP 192.168.1.10</p>
+<p><span>3. Connect via browser using 192.168.1.20</span></p>
+<p><span>4. After the initial login (ubnt/ubnt).</span></p>
+<p>5. Go to the Wireless Tab</p>
+<p>6. Keep the Wireless Mode to default as 'Station'</p>
+<p>7. Click 'Select' on the SSID field. This will open up the wireless survey page as follows.</p>
+</p>
+<p>
+</p>
+<p>
+<p><a href='https://sites.google.com/a/mamigoinc.com/development/Home/Projects/cloudmomentz/ubiquiti-nanostation-outdoor-wifi/ubnt-screen.jpg?attredirects=0' imageanchor='1'><img border='0' height='240' src='https://sites.google.com/a/mamigoinc.com/development/Home/Projects/cloudmomentz/ubiquiti-nanostation-outdoor-wifi/ubnt-screen.jpg' width='400'/></a></p>
+<p>
+</p>
+<p>8. Select the backend School's WiFi access point</p>
+<p>9. On the top right of the page - perform Test and Accept</p>
+<p>
+</p>
+<p>10. This will bring you back to the wireless tab</p>
+<p>11. Put in school's wireless access credentials</p>
+<p>12. Save and you are good to go.</p>
+13. Set your laptop back to DHCP.</p>
+<p>14. Validate network connectivity</p>
+<p>
+</p>
+<p>
+<hr/>
+NanoStation can be interfaced with AirGateway-LR from Ubiquiti to create a local hotspot.</p>
+<p>
+</p>
+<p>AirGateway-LR acts as a local router that can receive WAN connection either through a NanoStation connected on its POE port or a wired internet connected on its POE port via a POE splitter.</p>
+<p>
+</p>
+<p><a href='https://sites.google.com/a/mamigoinc.com/development/Home/Projects/cloudmomentz/ubiquiti-nanostation-outdoor-wifi/AirGateway%20Wiring.png?attredirects=0' imageanchor='1'><img border='0' src='https://sites.google.com/a/mamigoinc.com/development/Home/Projects/cloudmomentz/ubiquiti-nanostation-outdoor-wifi/AirGateway%20Wiring.png'/></a></p>
+<p >
+</p>
+<p >
+<p><a href='https://sites.google.com/a/mamigoinc.com/development/Home/Projects/cloudmomentz/ubiquiti-nanostation-outdoor-wifi/AirGateway%20Wiring%20%281%29.png?attredirects=0' imageanchor='1'><img border='0' src='https://sites.google.com/a/mamigoinc.com/development/Home/Projects/cloudmomentz/ubiquiti-nanostation-outdoor-wifi/AirGateway%20Wiring%20%281%29.png'/></a></p>
+<p>
+</p>
+<h2>Configuration of the AirGateway in either setup</h2>
+
+</p>
+<p>
+<p>Ensure the wireless mode is set to 'Access Point'.</p>
+<p>Setup the wireless SSID and Wireless Security credentials</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+<p><a href='https://sites.google.com/a/mamigoinc.com/development/Home/Projects/cloudmomentz/ubiquiti-nanostation-outdoor-wifi/airGateway-LR-Wireless%20Mode.jpg?attredirects=0' imageanchor='1'><img border='0' height='307' src='https://sites.google.com/a/mamigoinc.com/development/Home/Projects/cloudmomentz/ubiquiti-nanostation-outdoor-wifi/airGateway-LR-Wireless%20Mode.jpg' width='400'/></a></p>
+
+</p>
+
+</p>
+<p>Ensure the Network mode is set to SOHO Router</p>
+<p>
+</p>
+<p>
+<p><a href='https://sites.google.com/a/mamigoinc.com/development/Home/Projects/cloudmomentz/ubiquiti-nanostation-outdoor-wifi/airGateway-LR-Network-Mode.jpg?attredirects=0' imageanchor='1'><img border='0' height='322' src='https://sites.google.com/a/mamigoinc.com/development/Home/Projects/cloudmomentz/ubiquiti-nanostation-outdoor-wifi/airGateway-LR-Network-Mode.jpg' width='400'/></a></p>
+<p>
+</p>
+<p>
+</p>
+<p>I have verified that the airGateway operates as a local hotspot, even if there is NO WAN connection.</p>
+
+</p>
+<p>
+</p>
+<p>
+</p>
+</p>
