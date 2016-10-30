@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.ak.confluence.client.page.table.Table;
+
 /**
  * This class uses two symantics:
  * withxxx(...) or with(xxx) functions return the container with the new element appended
@@ -16,11 +18,15 @@ import java.util.Map.Entry;
 public class PageElement {
 	protected static final String STYLE = "style";
 	protected String myTag;
-	List<PageElement> children= new ArrayList<PageElement>();
+	protected List<PageElement> children= new ArrayList<PageElement>();
 	Map<String,String> attribs= new HashMap<String,String>();
 	protected PageElement(String tag)
 	{
 		myTag=tag;
+	}
+	public List<PageElement> getChildren()
+	{
+		return children;
 	}
 	/**
 	 * appends a new PageElement
@@ -33,7 +39,7 @@ public class PageElement {
 		children.add(c);
 		return this;
 	}
-	void addAttrib(String n, String v)
+	protected void addAttrib(String n, String v)
 	{
 		attribs.put(n,v);
 	}
@@ -89,9 +95,9 @@ public class PageElement {
 				.append(">");
 	}
 	protected StringBuffer empty(StringBuffer sb){
-		return sb.append("<")
-				.append(myTag)
-				.append("/>");
+		sb.append("<").append(myTag);
+		writeAttrib(sb);
+		return sb.append("/>");
 	}
 	//methods for simplification 
 	public Heading addHeading(int level) throws Exception
@@ -108,10 +114,10 @@ public class PageElement {
 	{
 		return with( new HRule());
 	}
-	public Text addText(String content)throws Exception
+	public Text addText(String content)
 	{
 		Text t = new Text().with(content);
-		with( t);
+		getChildren().add(t);
 		return t;
 	}
 	public PageElement withText(Text t)throws Exception
@@ -123,5 +129,11 @@ public class PageElement {
 		Paragraph p = new Paragraph();
 		with(p);
 		return p;
+	}
+	public Table addTable() throws Exception {
+		Table t= new Table();
+		with(t);
+		return t;
+		
 	}
 }

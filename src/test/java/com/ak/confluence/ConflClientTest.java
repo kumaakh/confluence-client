@@ -144,4 +144,9 @@ public class ConflClientTest {
 		String id=addPage(rootPage,PageBuilderTest.makeSimplePage());
 		assertThat(id,not(isEmptyOrNullString()));
 	}
+	@Test
+	public void testTablePageConstruction() throws Exception {
+		String id=addPage(rootPage,PageBuilderTest.makeTablePage());
+		assertThat(id,not(isEmptyOrNullString()));
+	}
 }

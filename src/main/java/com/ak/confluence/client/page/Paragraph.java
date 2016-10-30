@@ -38,6 +38,7 @@ public class Paragraph extends PageElement {
 		return super.toString(sb);
 	}
 	private void addStyleAttrib() {
+		if(styles.size()==0) return;
 		StringBuffer sb=new StringBuffer();
 		for(Entry<String, String> kv:styles.entrySet())
 		{
@@ -45,6 +46,7 @@ public class Paragraph extends PageElement {
 			.append(kv.getValue())
 			.append(";");
 		}
+		
 		addAttrib(STYLE, sb.toString());
 		
 	}
