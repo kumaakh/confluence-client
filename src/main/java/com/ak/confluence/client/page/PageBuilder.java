@@ -25,7 +25,7 @@ public class PageBuilder {
 	public PageElement getPageRoot() { return tree;}
 	public PageElement add(PageElement c) throws Exception
 	{
-		return tree.add(c);
+		return tree.with(c);
 	}
 	/**
 	 * Adds a single section which has a single cell

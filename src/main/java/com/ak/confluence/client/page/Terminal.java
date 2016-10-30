@@ -10,7 +10,7 @@ public abstract class Terminal extends PageElement {
 	}
 
 	@Override
-	public PageElement add(PageElement c) throws Exception {
+	public PageElement with(PageElement c) throws Exception {
 		throw new Exception("can not add a child to "+myTag);
 	}
 

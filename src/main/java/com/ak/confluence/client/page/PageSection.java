@@ -25,7 +25,7 @@ public class PageSection extends PageElement {
 		this.addAttrib("ac:type", acType);
 		for(int i=0;i<cellCount;i++)
 		{
-			add( new SectionCell(i));
+			with( new SectionCell(i));
 		}
 	}
 	public SectionCell getCell(int index) throws Exception

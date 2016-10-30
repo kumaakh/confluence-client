@@ -6,7 +6,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * This class uses two symantics:
+ * withxxx(...) or with(xxx) functions return the container with the new element appended
+ * addXXX(...) or add(xxx) return the added item.
+ * @author mamigo
+ *
+ */
 public class PageElement {
+	protected static final String STYLE = "style";
 	protected String myTag;
 	List<PageElement> children= new ArrayList<PageElement>();
 	Map<String,String> attribs= new HashMap<String,String>();
@@ -14,8 +22,13 @@ public class PageElement {
 	{
 		myTag=tag;
 	}
-	
-	public PageElement add(PageElement c) throws Exception
+	/**
+	 * appends a new PageElement
+	 * @param c
+	 * @return itself
+	 * @throws Exception
+	 */
+	public PageElement with(PageElement c) throws Exception
 	{
 		children.add(c);
 		return this;
@@ -81,32 +94,34 @@ public class PageElement {
 				.append("/>");
 	}
 	//methods for simplification 
-	public PageElement addHeading(int level, String text) throws Exception
+	public Heading addHeading(int level) throws Exception
 	{
 		Heading h = new Heading(level);
-		h.add(new Text().with(text));
-		return add( h);
+		with(h);
+		return h;
 	}
-	public PageElement addBR()throws Exception
+	public PageElement withBR()throws Exception
 	{
-		return add( new Break());
+		return with( new Break());
 	}
-	public PageElement addHR()throws Exception
+	public PageElement withHR()throws Exception
 	{
-		return add( new HRule());
+		return with( new HRule());
 	}
-	public PageElement addText(String content)throws Exception
+	public Text addText(String content)throws Exception
 	{
-		return add( new Text().with(content));
+		Text t = new Text().with(content);
+		with( t);
+		return t;
 	}
-	public PageElement addPara(Text t)throws Exception
+	public PageElement withText(Text t)throws Exception
+	{
+		return with( t);
+	}
+	public Paragraph addPara()throws Exception
 	{
 		Paragraph p = new Paragraph();
-		return add(p.add(t));
-	}
-	public PageElement addText(Text t)throws Exception
-	{
-		add(t);
-		return this;
+		with(p);
+		return p;
 	}
 }
