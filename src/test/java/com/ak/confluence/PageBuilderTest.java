@@ -48,7 +48,7 @@ public class PageBuilderTest {
 	}
 	
 	@Test
-	public void tesTablePage() throws Exception {
+	public void testTablePage() throws Exception {
 		PageBuilder b = makeTablePage();
 		Document d=b.parse();
 		assertNotNull(d);
@@ -105,7 +105,29 @@ public class PageBuilderTest {
 				row.addCell().addText("DK");
 			}
 		}
-		
+		{
+			c.withHR().addHeading(1).addText("Table with row headers");
+			Table t=c.addTable();
+			{
+				TR row=t.addRow();
+				row.addHeader().addText("Name");
+				row.addCell().addText("ak");
+				row.addCell().addText("bk");
+			}
+			{
+				TR row=t.addRow();
+				row.addHeader().addText("Age");
+				row.addCell().addText("30");
+				row.addCell().addText("35");
+			}
+			{
+				TR row=t.addRow();
+				row.addHeader().addText("City");
+				row.addCell().addText("BLR");
+				row.addCell().addText("NYC");
+			}
+			
+		}
 		return b;
 	}
 

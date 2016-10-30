@@ -37,10 +37,13 @@ Usage of the confluence client can be seen from  ConflClientTest
 * Trash Page: deletePage(<page id>, true) purges the page forever, even if it was never trashed 
 * Make one or more attachments to a page
 * Simple API for page construction:
-  - All Text formating
+  - All types of text formating
   - Text colors
-  - Heading
+  - Headings
   - Tables
+  	- with row/column headers
+  	- with differnt cell styles
+  	- with merged cells
   
 * All errors are published as HttpResponseExceptions with code and message 
 
