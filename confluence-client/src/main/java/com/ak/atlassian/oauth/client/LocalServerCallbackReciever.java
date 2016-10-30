@@ -1,4 +1,4 @@
-package com.atlassian.oauth.client.example;
+package com.ak.atlassian.oauth.client;
 
 import java.io.IOException;
 import java.io.PrintWriter;

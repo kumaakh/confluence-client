@@ -20,9 +20,9 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.atlassian.oauth.client.example.AtlassianOAuthClient;
-import com.atlassian.oauth.client.example.LocalServerCallbackReciever;
-import com.atlassian.oauth.client.example.TokenSecretVerifierHolder;
+import com.ak.atlassian.oauth.client.AtlassianOAuthClient;
+import com.ak.atlassian.oauth.client.LocalServerCallbackReciever;
+import com.ak.atlassian.oauth.client.TokenSecretVerifierHolder;
 
 
 /**

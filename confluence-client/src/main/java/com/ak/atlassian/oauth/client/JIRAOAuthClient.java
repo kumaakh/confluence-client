@@ -1,4 +1,4 @@
-package com.atlassian.oauth.client.example;
+package com.ak.atlassian.oauth.client;
 
 import com.google.common.collect.Lists;
 
