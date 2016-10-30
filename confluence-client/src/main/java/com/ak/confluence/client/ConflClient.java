@@ -3,6 +3,7 @@ package com.ak.confluence.client;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
@@ -30,6 +31,8 @@ import com.ak.atlassian.oauth.client.TokenSecretVerifierHolder;
  */
 public class ConflClient
 {
+	private static final String ACCESS_TOKEN = "accessToken";
+	private static final String CONFL_CLIENT_XML = "ConflClient.xml";
 	private final Log log;
 	private static final String ENCODING = "utf-8";
     private static final String CALLBACK_URI = "http://consumer/callback";
@@ -38,7 +41,7 @@ public class ConflClient
     protected String accessToken;
     protected String baseURL;
     protected String spaceKey;
-    
+    protected Properties props= new Properties();
 	//https://mamigo.atlassian.net/wiki/rest/api/content?spaceKey=OL&Title=OldSites+Home
     private String contentURL(String pageTitle) throws UnsupportedEncodingException{
     	return baseURL+"/rest/api/content?spaceKey="+spaceKey+"&Title="+URLEncoder.encode(pageTitle,ENCODING)+"&expand=";
@@ -73,15 +76,18 @@ public class ConflClient
 	public ConflClient() throws Exception
     {
     	this.log = LogFactory.getLog(getClass());
-    	Properties props= new Properties();
-    	props.loadFromXML(new FileInputStream("ConflClient.xml"));
+    	props.loadFromXML(new FileInputStream(CONFL_CLIENT_XML));
     	CONSUMER_PRIVATE_KEY=props.getProperty("CONSUMER_PRIVATE_KEY");
     	CONSUMER_KEY=props.getProperty("CONSUMER_KEY");
-    	accessToken=props.getProperty("accessToken");
+    	accessToken=props.getProperty(ACCESS_TOKEN);
     	baseURL=props.getProperty("baseURL");
     }
 
-    public void fetchAuthToken() throws Exception
+	public void fetchAuthToken() throws Exception
+	{
+		fetchAuthToken(true);
+	}
+    public void fetchAuthToken(boolean saveToken) throws Exception
     {
     	LocalServerCallbackReciever localServerReceiver = new LocalServerCallbackReciever.Builder().setPort( 8081 ).build();
     	// fetch client token and secret 
@@ -96,6 +102,10 @@ public class ConflClient
 	        requestToken.verifier=localServerReceiver.waitForCode(requestToken.token);
 	        accessToken = jiraoAuthClient.swapRequestTokenForAccessToken(requestToken);
 	        log.info("access Token "+accessToken);
+	        props.setProperty(ACCESS_TOKEN, accessToken);
+	        log.info("saving properties");
+	        if(saveToken)
+	        	props.storeToXML(new FileOutputStream(CONFL_CLIENT_XML),null);
 	    }
         finally{
         	//localServerReceiver.stop();

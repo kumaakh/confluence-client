@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<!-- setup based on 
+https://developer.atlassian.com/jiradev/jira-apis/jira-rest-apis/jira-rest-api-tutorials/jira-rest-api-example-oauth-authentication 
+ -->
+<entry key="CONSUMER_KEY">hardcoded-consumer</entry>
+<entry key="CONSUMER_PRIVATE_KEY">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxZDzGUGk6rElyPm0iOua0lWg84nOlhQN1gmTFTIu5WFyQFHZF6OA4HX7xATttQZ6N21yKMakuNdRvEudyN/coUqe89r3Ae+rkEIn4tCxGpJWX205xVF3Cgsn8ICj6dLUFQPiWXouoZ7HG0sPKhCLXXOvUXmekivtyx4bxVFD9Zy4SQ7IHTx0V0pZYGc6r1gF0LqRmGVQDaQSbivigH4mlVwoAO9Tfccf+V00hYuSvntU+B1ZygMw2rAFLezJmnftTxPuehqWu9xS5NVsPsWgBL7LOi3oY8lhzOYjbMKDWM6zUtpOmWJA52cVJW6zwxCxE28/592IARxlJcq14tjwYwIDAQAB</entry>
+<entry key="baseURL">http://localhost:8090/wiki</entry>
+<!-- 
+<entry key="accessToken">put the access token here</entry>
+ -->
+</properties>
