@@ -1,10 +1,6 @@
 package com.ak.confluence;
 
-import static com.ak.confluence.client.page.TextStyle.bold;
-import static com.ak.confluence.client.page.TextStyle.italic;
-import static com.ak.confluence.client.page.TextStyle.monoSpace;
-import static com.ak.confluence.client.page.TextStyle.subScript;
-import static com.ak.confluence.client.page.TextStyle.undeline;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.awt.Color;
@@ -28,20 +24,20 @@ public class PageBuilderTest {
 		PageBuilder b = new PageBuilder("Content Test Page");
 		SectionCell c= b.addSingleSection();
 		c.addHeading(1).addText("Heading 1");
-		c.withBR().addPara().withText(bold(undeline(new Text("a very important message"))));
+		c.withBR().addPara().withText(Text.create("text with bold underline").bold().undeline());
 		c.withHR().addHeading(2).addText("Heading 2").with(Color.RED);
-		c.withBR().addPara().withText(italic(new Text("some italicized text")));
-		c.withHR().addPara().withText(monoSpace(new Text("some interesting code block with monospace")));
-		c.withHR().addPara().withText(subScript(new Text("some tiny text")));
-		c.withHR().addPara().withText(new Text("Some text in red color",Color.RED));
+		c.withBR().addPara().withText(Text.create("some italicized text").italic());
+		c.withHR().addPara().withText(Text.create("some interesting code block with monospace").monoSpace());
+		c.withHR().addPara().withText(Text.create("some tiny text").subScript());
+		c.withHR().addPara().withText(Text.create("Some text in red color", Color.RED));
 		c.withHR().addPara().with(Alignment.CENTER).addText("center aligned");
 		c.withHR().addPara().with(Alignment.RIGHT).addText("right aligned");
 		c.withHR().addPara().withLeftmargin(60).addText("indented");
 		c.withHR().addPara().withLeftmargin(60).with(Alignment.CENTER). addText("indented and center aligned");
-		c.withHR().addBulletList().withItem(new Text("apples")).withItem(new Text("oranges")).withItem(new Text("mangoes"));
-		c.withHR().addNumberedList().withItem(new Text("apples")).withItem(new Text("oranges")).withItem(new Text("mangoes"));
-		c.withHR().addTaskList().withItem(new Text("task 1")).withItem(true,new Text("task 2")).addItem(false).addText("task 3");
-		c.withHR().addQuote().addPara().withText(new Text("some quoted text")).withBR().addText("some more quoted Text");
+		c.withHR().addBulletList().withItem(Text.create("apples")).withItem(Text.create("oranges")).withItem(Text.create("mangoes"));
+		c.withHR().addNumberedList().withItem(Text.create("apples")).withItem(Text.create("oranges")).withItem(Text.create("mangoes"));
+		c.withHR().addTaskList().withItem(Text.create("task 1")).withItem(true,Text.create("task 2")).addItem(false).addText("task 3");
+		c.withHR().addQuote().addPara().withText(Text.create("some quoted text")).withBR().addText("some more quoted Text");
 		
 		return b;
 	}
@@ -55,7 +51,7 @@ public class PageBuilderTest {
 			Table t=c.addTable();
 			{
 				TR headRow=t.addHeaderRow();
-				headRow.addHeader().withNumbering().withText(new Text("Sl."));
+				headRow.addHeader().withNumbering().withText(Text.create("Sl."));
 				headRow.addHeader().with(TDStyle.BLUE).addPara().addText("Name");
 				headRow.addHeader().with(TDStyle.GREEN).addText("City");
 			}
@@ -77,7 +73,7 @@ public class PageBuilderTest {
 			Table t=c.addTable();
 			{
 				TR headRow=t.addHeaderRow();
-				headRow.addHeader().withNumbering().withText(new Text("Sl."));
+				headRow.addHeader().withNumbering().withText(Text.create("Sl."));
 				headRow.addHeader().with(TDStyle.BLUE).addPara().addText("Name");
 				headRow.addHeader().with(TDStyle.GREEN).addText("City");
 			}
@@ -180,5 +176,17 @@ public class PageBuilderTest {
 		PageBuilder b = makeLinksPage();
 		Document d=b.parse();
 		assertNotNull(d);
+	}
+	@Test
+	public void testText()
+	{
+		String v="text";
+		assertEquals(Text.create(v).toString(),v);
+		assertEquals(Text.create(v).with(Color.RED).toString(),"<span style='color:rgb(255,0,0);' >text</span>");
+		assertEquals(Text.create(v).withCData().toString(),"<![CDATA[text]]>");
+		assertEquals(Text.create(v).withCData().with(Color.RED).toString(),"<span style='color:rgb(255,0,0);' ><![CDATA[text]]></span>");
+		assertEquals(Text.create(v).bold().toString(),"<strong>text</strong>");
+		assertEquals(Text.create(v).bold().italic().toString(),"<em><strong>text</strong></em>");
+		assertEquals(Text.create(v).bold().italic().with(Color.RED).toString(),"<em><strong><span style='color:rgb(255,0,0);' >text</span></strong></em>");
 	}
 }

@@ -14,7 +14,7 @@ public class TaskList extends AbsElement {
 	class ItemStatus extends AbsElement {
 		protected ItemStatus(boolean isComplete) {
 			super("ac:task-status");
-			with(new Text((isComplete)?"complete":"incomplete"));
+			with(Text.create((isComplete)?"complete":"incomplete"));
 		}
 	}
 
@@ -22,7 +22,7 @@ public class TaskList extends AbsElement {
 		class ItemID extends PageElement {
 			protected ItemID(int id) {
 				super("ac:task-id");
-				with(new Text("" + id));
+				with(Text.create("" + id));
 			}
 		}
 

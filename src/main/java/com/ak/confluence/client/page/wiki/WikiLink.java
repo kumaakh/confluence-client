@@ -25,7 +25,7 @@ public class WikiLink extends WikiElement{
 	public WikiLink withText(String content)
 	{
 		WikiPlainText t = new WikiPlainText();
-		t.getChildren().add((new Text(content)).withCData());
+		t.getChildren().add((Text.create(content)).withCData());
 		getChildren().add(getChildren().size(),t);//add last
 		return this;
 	}
