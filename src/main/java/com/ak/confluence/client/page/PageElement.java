@@ -8,13 +8,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.ak.confluence.client.page.table.Table;
+import com.ak.confluence.client.page.wiki.WikiImageLink;
 import com.ak.confluence.client.page.wiki.WikiLink;
 
 /**
  * This class uses two symantics:
  * withxxx(...) or with(xxx) functions return the container with the new element appended
  * addXXX(...) or add(xxx) return the added item.
- * @author mamigo
+ * @author akhil.kumar@gmail.com
  *
  */
 public class PageElement {
@@ -135,6 +136,12 @@ public class PageElement {
 	public WikiLink addWikiLink() 
 	{
 		WikiLink h = new WikiLink();
+		getChildren().add(h);
+		return h;
+	}
+	public WikiImageLink addImageLink()
+	{
+		WikiImageLink h = new WikiImageLink();
 		getChildren().add(h);
 		return h;
 	}

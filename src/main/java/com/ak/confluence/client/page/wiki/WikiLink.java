@@ -1,9 +1,8 @@
 package com.ak.confluence.client.page.wiki;
 
-import com.ak.confluence.client.page.PageElement;
 import com.ak.confluence.client.page.Text;
 
-public class WikiLink extends PageElement {
+public class WikiLink extends WikiElement{
 
 	public WikiLink() {
 		super("ac:link");
@@ -20,11 +19,5 @@ public class WikiLink extends PageElement {
 		t.withText((new Text(content)).withCData());
 		getChildren().add(getChildren().size(),t);//add last
 		return this;
-	}
-	public WikiAttachmentLink toAttachment(String filename)
-	{
-		WikiAttachmentLink p = new WikiAttachmentLink(filename);
-		getChildren().add(0, p);
-		return p;
 	}
 }

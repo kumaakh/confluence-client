@@ -20,6 +20,7 @@ import com.ak.confluence.client.page.Text;
 import com.ak.confluence.client.page.table.TD.TDStyle;
 import com.ak.confluence.client.page.table.TR;
 import com.ak.confluence.client.page.table.Table;
+import com.ak.confluence.client.page.wiki.WikiImageLink.ImageEffects;
 
 public class PageBuilderTest {
 
@@ -139,6 +140,19 @@ public class PageBuilderTest {
 		c.withBR().addWikiLink().toAttachment("anImg.jpeg");
 		c.addPara().addWikiLink().toAttachment("bImg.jpeg").ofPage("Other Page");
 		c.addPara().addWikiLink().toAttachment("fractal.jpg").ofPage("Jasper_vs_SBG_differences").inSpace("OS");
+		
+		c.withHR().addPara().addText("Image from own attachment with effects");
+		c.addImageLink().withEffects(ImageEffects.Taped).toAttachment("anImg.jpeg");
+		
+		c.withHR().addPara().addText("Image from other pages attachment with border");
+		c.addImageLink().withBorder().toAttachment("bImg.jpeg").ofPage("Other Page");
+		
+		c.withHR().addPara().addText("Image from other pages attachment from another space");
+		c.addImageLink().withHeight(100).toAttachment("fractal.jpg").ofPage("Jasper_vs_SBG_differences").inSpace("OS");
+		
+		c.withHR().addPara().addText("Image from internet with effects");
+		c.addImageLink().withRemoteLink(new URI("https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2.png"));
+		
 		return b;
 	}
 	

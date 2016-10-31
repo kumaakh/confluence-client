@@ -50,15 +50,17 @@ Usage of the confluence client can be seen from  ConflClientTest
     - other wiki pages 
     - attachments
     - including pages and attachments from other spaces
+  - Images
+    - from attachments
+    - from web
+    - with various properties
+    - with advanced effects
+    
   	
   
 * All errors are published as HttpResponseExceptions with code and message 
 
 ## TBD
-* Images
- - inline
- - from web
- - with advanced props
 * Tree of children
 * TOC
 * List of attachments

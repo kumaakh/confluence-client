@@ -69,9 +69,13 @@ public class ConflClientTest {
 	}
 	private String addPage(String parentID, String title, String content) throws Exception
 	{
+		return addPage(parentID, title, content, true);
+	}
+	private String addPage(String parentID, String title, String content, boolean showPage) throws Exception
+	{
 		rememberToDelete(title);
 		String id = client.addPage(parentID, title, content);
-		openPage(client.getPageURI(title));
+		if(showPage) openPage(client.getPageURI(title));
 		return id;
 	}
 	private String addPage(String parentID, PageBuilder b) throws Exception
@@ -79,7 +83,7 @@ public class ConflClientTest {
 		return addPage(parentID, b.getTitle(), b.toString());
 	}
 	private String addPageWithAttachment(String parentID, PageBuilder b, String attFileName) throws Exception{
-		String id=addPage(parentID, b.getTitle(), "");
+		String id=addPage(parentID, b.getTitle(), "",false);
 		assertThat(id,not(isEmptyOrNullString()));
 		String attid=client.makeAttachment(id, attFileName, "", true);
 		assertThat(attid,not(isEmptyOrNullString()));
@@ -122,7 +126,10 @@ public class ConflClientTest {
 	@Test
 	public void testMakeMultipleAttachments() throws Exception {
 		
-		String id=addPage(rootPage, "Page with two attachments", "<p>refer other page <ac:link><ri:page ri:content-title='Hello world Page' /></ac:link></p><p><br /></p><p>link to attachment&nbsp;<ac:link><ri:attachment ri:filename='bImg.jpeg' /></ac:link></p><p><br /></p><p><ac:link><ri:attachment ri:filename='anImg.jpeg' /><ac:plain-text-link-body><![CDATA[link]]></ac:plain-text-link-body></ac:link> to att</p><p><br /></p><p>inlined image</p><p><ac:image><ri:attachment ri:filename='bImg.jpeg' /></ac:image></p><p><br /></p>");
+		String title = "Page with two attachments";
+		String id=addPage(rootPage, title
+				, "<p>refer other page <ac:link><ri:page ri:content-title='Hello world Page' /></ac:link></p><p><br /></p><p>link to attachment&nbsp;<ac:link><ri:attachment ri:filename='bImg.jpeg' /></ac:link></p><p><br /></p><p><ac:link><ri:attachment ri:filename='anImg.jpeg' /><ac:plain-text-link-body><![CDATA[link]]></ac:plain-text-link-body></ac:link> to att</p><p><br /></p><p>inlined image</p><p><ac:image><ri:attachment ri:filename='bImg.jpeg' /></ac:image></p><p><br /></p>"
+				,false);
 		assertThat(id,not(isEmptyOrNullString()));
 		
 		String page=client.getPageContentById(id);
@@ -134,7 +141,7 @@ public class ConflClientTest {
 		
 		Collection<String> attIds=client.makeMultipleAttachments(id, atts.entrySet(), true);
 		assertThat(attIds.size(), is(2));
-		
+		openPage(client.getPageURI(title));
 	}
 	@Test
 	public void testComplexPage() throws Exception {
