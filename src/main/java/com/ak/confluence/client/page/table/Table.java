@@ -1,8 +1,9 @@
 package com.ak.confluence.client.page.table;
 
-import com.ak.confluence.client.page.PageElement;
+import com.ak.confluence.client.page.AbsElement;
 
-public class Table extends PageElement {
+
+public class Table extends AbsElement {
 
 	TBody body;
 	public Table(){

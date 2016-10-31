@@ -1,23 +1,24 @@
 package com.ak.confluence.client.page.wiki;
 
+import com.ak.confluence.client.page.AbsElement;
 import com.ak.confluence.client.page.PageElement;
 import com.ak.confluence.client.page.Text;
 
-public class TaskList extends PageElement {
+public class TaskList extends AbsElement {
 
 	public class ItemBody extends PageElement {
 		protected ItemBody() {
 			super("ac:task-body");
 		}
 	}
-	class ItemStatus extends PageElement {
+	class ItemStatus extends AbsElement {
 		protected ItemStatus(boolean isComplete) {
 			super("ac:task-status");
 			with(new Text((isComplete)?"complete":"incomplete"));
 		}
 	}
 
-	class Item extends PageElement {
+	class Item extends AbsElement {
 		class ItemID extends PageElement {
 			protected ItemID(int id) {
 				super("ac:task-id");
@@ -57,10 +58,10 @@ public class TaskList extends PageElement {
 	 * @param e
 	 * @return
 	 */
-	public TaskList withItem(PageElement e) {
+	public TaskList withItem(AbsElement e) {
 		return withItem(false, e);
 	}
-	public TaskList withItem(boolean isComplete,PageElement e) {
+	public TaskList withItem(boolean isComplete,AbsElement e) {
 		addItem(isComplete).getChildren().add(e);
 		return this;
 	}

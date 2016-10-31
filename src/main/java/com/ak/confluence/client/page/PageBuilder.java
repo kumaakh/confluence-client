@@ -23,7 +23,7 @@ public class PageBuilder {
 		this.title=title;
 	}
 	public PageElement getPageRoot() { return tree;}
-	public PageElement add(PageElement c) throws Exception
+	public AbsElement add(AbsElement c) throws Exception
 	{
 		return tree.with(c);
 	}

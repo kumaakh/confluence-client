@@ -29,7 +29,7 @@ public class PageBuilderTest {
 		SectionCell c= b.addSingleSection();
 		c.addHeading(1).addText("Heading 1");
 		c.withBR().addPara().withText(bold(undeline(new Text("a very important message"))));
-		c.withHR().addHeading(2).withText((new Text("Heading 2")).with(Color.RED));
+		c.withHR().addHeading(2).addText("Heading 2").with(Color.RED);
 		c.withBR().addPara().withText(italic(new Text("some italicized text")));
 		c.withHR().addPara().withText(monoSpace(new Text("some interesting code block with monospace")));
 		c.withHR().addPara().withText(subScript(new Text("some tiny text")));
@@ -151,10 +151,10 @@ public class PageBuilderTest {
 		c.withHR().addPara().addText("Image from other pages attachment with border");
 		c.addImageLink().withBorder().toAttachment("bImg.jpeg").ofPage("Other Page");
 		
-		c.withHR().addPara().addText("Image from other pages attachment from another space");
+		c.withHR().addPara().addText("Image from another space notice the height");
 		c.addImageLink().withHeight(100).toAttachment("fractal.jpg").ofPage("Jasper_vs_SBG_differences").inSpace("OS");
 		
-		c.withHR().addPara().addText("Image from internet with effects");
+		c.withHR().addPara().addText("Image from internet can not have effects");
 		c.addImageLink().withRemoteLink(new URI("https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2.png"));
 		
 		return b;

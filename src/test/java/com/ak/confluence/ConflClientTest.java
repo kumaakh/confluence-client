@@ -100,7 +100,7 @@ public class ConflClientTest {
 
 	@Test
 	public void testAddPage() throws Exception {
-		String id=addPage(rootPage, "Hello world Page", "<p>Hello world</p>");
+		String id=addPage(rootPage, "Hello world Page", "<p>Hello world</p>",false);
 		assertThat(id,not(isEmptyOrNullString()));
 		
 		String page=client.getPageContentById(id);
@@ -117,7 +117,7 @@ public class ConflClientTest {
 	
 	@Test
 	public void testMakeAttachment() throws Exception {
-		String id=addPage(rootPage, "AttachmentTestPage", "<p>Hello world</p>");
+		String id=addPage(rootPage, "AttachmentTestPage", "<p>Hello world</p>",false);
 		String attId=client.makeAttachment(id, "testData/anImg.jpeg", "added a new image", true);
 		assertThat(attId,not(isEmptyOrNullString()));
 		
@@ -152,13 +152,13 @@ public class ConflClientTest {
 	@Test
 	public void testPageDelete() throws Exception {
 		{
-			String id=addPage(rootPage, "DeleteTest","");
+			String id=addPage(rootPage, "DeleteTest","",false);
 			assertThat(id,not(isEmptyOrNullString()));
 			client.deletePage(id, false); //should be trashed
 			client.deletePage(id, true);  //should be deleted
 		}
 		{
-			String id=addPage(rootPage, "DeleteTest2","");
+			String id=addPage(rootPage, "DeleteTest2","",false);
 			assertThat(id,not(isEmptyOrNullString()));
 			client.deletePage(id, true);  //should be trashed and deleted
 		}

@@ -1,8 +1,8 @@
 package com.ak.atlassian.oauth.client;
 
-import com.google.common.collect.Lists;
-
 import java.util.ArrayList;
+
+import com.google.common.collect.Lists;
 
 /**
  * @since v1.0

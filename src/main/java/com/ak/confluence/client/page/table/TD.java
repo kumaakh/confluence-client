@@ -1,8 +1,9 @@
 package com.ak.confluence.client.page.table;
 
+import com.ak.confluence.client.page.PageElement;
 import com.ak.confluence.client.page.Text;
 
-public class TD extends TableElement {
+public class TD extends PageElement {
 	public enum TDStyle {
 		GRAY("grey"),
 		RED("red"),

@@ -2,9 +2,19 @@ package com.ak.confluence.client.page.wiki;
 
 import java.net.URI;
 
+import com.ak.confluence.client.page.AbsElement;
+
 
 public class WikiImageLink extends WikiElement {
 	
+	class RemoteLink extends AbsElement {
+
+		public RemoteLink(URI uri) {
+			super("ri:url");
+			addAttrib("ri:value", uri.toASCIIString());
+		}
+	}
+
 	boolean remoteLink=false;
 	boolean effects=false;
 	public enum ImageEffects{

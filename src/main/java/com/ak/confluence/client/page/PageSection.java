@@ -30,7 +30,7 @@ public class PageSection extends PageElement {
 	}
 	public SectionCell getCell(int index) throws Exception
 	{
-		for(PageElement p:children)
+		for(AbsElement p:children)
 		{
 			if (SectionCell.class.isInstance(p))
 			{

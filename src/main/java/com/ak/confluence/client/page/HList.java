@@ -17,7 +17,7 @@ public class HList extends PageElement {
 		with(i);
 		return i;
 	}
-	public HList withItem(PageElement e)
+	public HList withItem(AbsElement e)
 	{
 		addItem().with(e);
 		return this;

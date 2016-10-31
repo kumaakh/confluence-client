@@ -1,8 +1,17 @@
 package com.ak.confluence.client.page.wiki;
 
+import com.ak.confluence.client.page.AbsElement;
 import com.ak.confluence.client.page.Text;
 
 public class WikiLink extends WikiElement{
+	
+	class WikiPlainText extends AbsElement {
+
+		WikiPlainText() {
+			super("ac:plain-text-link-body");
+		}
+	}
+
 
 	public WikiLink() {
 		super("ac:link");
@@ -16,7 +25,7 @@ public class WikiLink extends WikiElement{
 	public WikiLink withText(String content)
 	{
 		WikiPlainText t = new WikiPlainText();
-		t.withText((new Text(content)).withCData());
+		t.getChildren().add((new Text(content)).withCData());
 		getChildren().add(getChildren().size(),t);//add last
 		return this;
 	}

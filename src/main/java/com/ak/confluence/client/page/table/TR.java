@@ -1,8 +1,8 @@
 package com.ak.confluence.client.page.table;
 
-import com.ak.confluence.client.page.PageElement;
+import com.ak.confluence.client.page.AbsElement;
 
-public class TR extends TableElement {
+public class TR extends AbsElement {
 
 	protected TR() {
 		super("tr");
@@ -37,7 +37,7 @@ public class TR extends TableElement {
 
 	public boolean hasColHeaders()
 	{
-		for(PageElement t:children)
+		for(AbsElement t:children)
 		{
 			if(TH.class.isInstance(t))
 				return true;

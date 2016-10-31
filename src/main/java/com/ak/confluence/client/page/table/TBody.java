@@ -1,8 +1,8 @@
 package com.ak.confluence.client.page.table;
 
-import com.ak.confluence.client.page.PageElement;
+import com.ak.confluence.client.page.AbsElement;
 
-public class TBody extends TableElement {
+public class TBody extends AbsElement {
 
 	int rowCount=0;
 	protected TBody() {
@@ -27,7 +27,7 @@ public class TBody extends TableElement {
 		return t;
 	}
 	public boolean hasHeaderRow() {
-		for(PageElement p:children)
+		for(AbsElement p:children)
 		{
 			if(TR.class.isInstance(p))
 			{

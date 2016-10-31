@@ -1,9 +1,9 @@
 package com.ak.confluence.client.page.wiki;
 
-import com.ak.confluence.client.page.PageElement;
+import com.ak.confluence.client.page.AbsElement;
 
 
-public class WikiAttachmentLink extends PageElement {
+public class WikiAttachmentLink extends AbsElement {
 
 	public WikiAttachmentLink(String fileName) {
 		super("ri:attachment");
