@@ -31,7 +31,7 @@ public class TextStyle extends Text {
 	}
 
 	@Override
-	public String toString(StringBuffer sb) {
+	protected String toString(StringBuffer sb) {
 		pre(sb,style);
 		t.toString(sb);
 		post(sb,style);

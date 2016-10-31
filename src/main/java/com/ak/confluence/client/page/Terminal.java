@@ -10,12 +10,12 @@ public abstract class Terminal extends PageElement {
 	}
 
 	@Override
-	public PageElement with(PageElement c) throws Exception {
-		throw new Exception("can not add a child to "+myTag);
+	protected PageElement with(PageElement c){
+		throw new IllegalArgumentException("can not add a child to "+myTag);
 	}
 
 	@Override
-	public String toString(StringBuffer sb) {
+	protected String toString(StringBuffer sb) {
 		return empty(sb).toString();
 	}
 

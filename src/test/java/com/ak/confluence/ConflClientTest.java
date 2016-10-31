@@ -1,5 +1,6 @@
 package com.ak.confluence;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.hamcrest.Matchers.not;
@@ -8,7 +9,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.Desktop;
 import java.io.File;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -60,14 +63,30 @@ public class ConflClientTest {
 	private void rememberToDelete(String title){
 		pages.add(title);
 	}
+	private void openPage(URI uri) throws Exception
+	{
+		Desktop.getDesktop().browse(uri);
+	}
 	private String addPage(String parentID, String title, String content) throws Exception
 	{
 		rememberToDelete(title);
-		return client.addPage(parentID, title, content);
+		String id = client.addPage(parentID, title, content);
+		openPage(client.getPageURI(title));
+		return id;
 	}
 	private String addPage(String parentID, PageBuilder b) throws Exception
 	{
 		return addPage(parentID, b.getTitle(), b.toString());
+	}
+	private String addPageWithAttachment(String parentID, PageBuilder b, String attFileName) throws Exception{
+		String id=addPage(parentID, b.getTitle(), "");
+		assertThat(id,not(isEmptyOrNullString()));
+		String attid=client.makeAttachment(id, attFileName, "", true);
+		assertThat(attid,not(isEmptyOrNullString()));
+		int v=client.updatePage(id, 2, b.getTitle(), b.toString());
+		assertThat(v, is(equalTo(2)));
+		openPage(client.getPageURI(b.getTitle()));
+		return id;
 	}
 	@Test
 	public void testGetPageId() throws Exception {
@@ -149,4 +168,13 @@ public class ConflClientTest {
 		String id=addPage(rootPage,PageBuilderTest.makeTablePage());
 		assertThat(id,not(isEmptyOrNullString()));
 	}
+	@Test
+	public void testLinkPageConstruction() throws Exception {
+		
+		String otherid=addPage(rootPage, "Other Page", "");
+		client.makeAttachment(otherid, "testData/bImg.jpeg", "",true);
+		String id=addPageWithAttachment(rootPage,PageBuilderTest.makeLinksPage(),"testData/anImg.jpeg");
+		assertThat(id,not(isEmptyOrNullString()));
+	}
+	
 }

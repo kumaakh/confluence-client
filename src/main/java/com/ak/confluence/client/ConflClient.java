@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -233,6 +235,11 @@ public class ConflClient
     	}
     	return attIds;
     }
+	
+	public URI getPageURI(String title) throws Exception
+	{
+		return new URI(baseURL+"/display/"+spaceKey+"/"+ URLEncoder.encode(title,"UTF-8"));
+	}
 	private String makePageCotentRequest(int version, String pageTitle, String bodyContent)throws Exception {
 		JSONObject req = new JSONObject();
 			JSONObject v = new JSONObject();

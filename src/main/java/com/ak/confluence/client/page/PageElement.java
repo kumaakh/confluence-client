@@ -1,5 +1,6 @@
 package com.ak.confluence.client.page;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.ak.confluence.client.page.table.Table;
+import com.ak.confluence.client.page.wiki.WikiLink;
 
 /**
  * This class uses two symantics:
@@ -34,7 +36,7 @@ public class PageElement {
 	 * @return itself
 	 * @throws Exception
 	 */
-	public PageElement with(PageElement c) throws Exception
+	protected PageElement with(PageElement c)
 	{
 		children.add(c);
 		return this;
@@ -61,7 +63,7 @@ public class PageElement {
 	public String toString() {
 		return toString(new StringBuffer());
 	}
-	public String toString(StringBuffer sb) {
+	protected String toString(StringBuffer sb) {
 		if(children.size()==0)
 		{
 			empty(sb);
@@ -99,20 +101,12 @@ public class PageElement {
 		writeAttrib(sb);
 		return sb.append("/>");
 	}
-	//methods for simplification 
+	//add methods should return the added 
 	public Heading addHeading(int level) throws Exception
 	{
 		Heading h = new Heading(level);
-		with(h);
+		getChildren().add(h);
 		return h;
-	}
-	public PageElement withBR()throws Exception
-	{
-		return with( new Break());
-	}
-	public PageElement withHR()throws Exception
-	{
-		return with( new HRule());
 	}
 	public Text addText(String content)
 	{
@@ -120,20 +114,46 @@ public class PageElement {
 		getChildren().add(t);
 		return t;
 	}
-	public PageElement withText(Text t)throws Exception
-	{
-		return with( t);
-	}
-	public Paragraph addPara()throws Exception
+	public Paragraph addPara()
 	{
 		Paragraph p = new Paragraph();
-		with(p);
+		getChildren().add(p);
 		return p;
 	}
-	public Table addTable() throws Exception {
+	public Table addTable(){
 		Table t= new Table();
-		with(t);
+		getChildren().add(t);
 		return t;
 		
+	}
+	public HLink addHLink(URI uri) 
+	{
+		HLink h = new HLink(uri);
+		getChildren().add(h);
+		return h;
+	}
+	public WikiLink addWikiLink() 
+	{
+		WikiLink h = new WikiLink();
+		getChildren().add(h);
+		return h;
+	}
+	
+	
+	//with methods should return this
+	public PageElement withBR()
+	{
+		getChildren().add( new Break());
+		return this;
+	}
+	public PageElement withHR()
+	{
+		getChildren().add( new HRule());
+		return this;
+	}
+	public PageElement withText(Text t)
+	{
+		getChildren().add(t);
+		return this;
 	}
 }

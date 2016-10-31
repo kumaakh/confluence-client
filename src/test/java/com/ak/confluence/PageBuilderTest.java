@@ -8,6 +8,7 @@ import static com.ak.confluence.client.page.TextStyle.undeline;
 import static org.junit.Assert.assertNotNull;
 
 import java.awt.Color;
+import java.net.URI;
 
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -16,18 +17,11 @@ import com.ak.confluence.client.page.PageBuilder;
 import com.ak.confluence.client.page.Paragraph.Alignment;
 import com.ak.confluence.client.page.SectionCell;
 import com.ak.confluence.client.page.Text;
+import com.ak.confluence.client.page.table.TD.TDStyle;
 import com.ak.confluence.client.page.table.TR;
 import com.ak.confluence.client.page.table.Table;
-import com.ak.confluence.client.page.table.TD.TDStyle;
 
 public class PageBuilderTest {
-
-	@Test
-	public void testSimplePage() throws Exception {
-		PageBuilder b = makeSimplePage();
-		Document d=b.parse();
-		assertNotNull(d);
-	}
 
 	public static PageBuilder makeSimplePage() throws Exception {
 		PageBuilder b = new PageBuilder("Content Test Page");
@@ -47,12 +41,6 @@ public class PageBuilderTest {
 		return b;
 	}
 	
-	@Test
-	public void testTablePage() throws Exception {
-		PageBuilder b = makeTablePage();
-		Document d=b.parse();
-		assertNotNull(d);
-	}
 
 	public static PageBuilder makeTablePage() throws Exception {
 		PageBuilder b = new PageBuilder("Table Test Page");
@@ -131,4 +119,48 @@ public class PageBuilderTest {
 		return b;
 	}
 
+	public static PageBuilder makeLinksPage() throws Exception {
+		PageBuilder b = new PageBuilder("Links and images test Page");
+		SectionCell c= b.addSingleSection();
+		c.addPara().addHLink(new URI("http://www.google.com")).addText("link to external website");
+		
+		c.withHR().addWikiLink().withText("Link to another page in the same wiki").toPage("Other Page");
+		c.addPara().addText("Next Link has no content it points to another page");
+		c.addPara().addWikiLink().toPage("Other Page");
+		
+		c.withHR().addPara().addWikiLink().withText("Link to another page in the another wiki").toPage("Development").inSpace("DEV");
+		c.withBR().addText("Next Link has no content it points to another page in another wiki");
+		c.addPara().addWikiLink().toPage("Development").inSpace("DEV");
+		
+		c.withHR().addWikiLink().withText("Link to my own attachment").toAttachment("anImg.jpeg");
+		c.addPara().addWikiLink().withText("Link to another pages attachment").toAttachment("bImg.jpeg").ofPage("Other Page");
+		c.addPara().addWikiLink().withText("Link attachment from another space").toAttachment("fractal.jpg").ofPage("Jasper_vs_SBG_differences").inSpace("OS");
+		c.addPara().addText("Following links have no content");
+		c.withBR().addWikiLink().toAttachment("anImg.jpeg");
+		c.addPara().addWikiLink().toAttachment("bImg.jpeg").ofPage("Other Page");
+		c.addPara().addWikiLink().toAttachment("fractal.jpg").ofPage("Jasper_vs_SBG_differences").inSpace("OS");
+		return b;
+	}
+	
+	@Test
+	public void testSimplePage() throws Exception {
+		PageBuilder b = makeSimplePage();
+		Document d=b.parse();
+		assertNotNull(d);
+	}
+	
+
+	@Test
+	public void testTablePage() throws Exception {
+		PageBuilder b = makeTablePage();
+		Document d=b.parse();
+		assertNotNull(d);
+	}
+
+	@Test
+	public void testLinksPage() throws Exception {
+		PageBuilder b = makeLinksPage();
+		Document d=b.parse();
+		assertNotNull(d);
+	}
 }

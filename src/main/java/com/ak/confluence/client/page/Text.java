@@ -5,6 +5,7 @@ import java.awt.Color;
 public class Text extends Terminal {
 	Color clr;
 	String content;
+	boolean inCData;
 	protected Text() {
 		this("");
 	}
@@ -40,15 +41,32 @@ public class Text extends Terminal {
 		addAttrib(STYLE, sb.toString());
 		return this;
 	}
-	@Override
-	public String toString(StringBuffer sb) {
-		if(clr==null){
+	public Text withCData()
+	{
+		inCData=true;
+		return this;
+	}
+	protected void getContent(StringBuffer sb)
+	{
+		if(inCData)
+		{
+			sb.append("<![CDATA[")
+			.append(content)
+			.append("]]>");
+		}
+		else{
 			sb.append(content);
+		}
+	}
+	@Override
+	protected String toString(StringBuffer sb) {
+		if(clr==null){
+			getContent(sb);
 		}
 		else {
 			String tag="span";
 			pre(sb,tag);
-			sb.append(content);
+			getContent(sb);
 			post(sb,tag);
 		}
 		return sb.toString();

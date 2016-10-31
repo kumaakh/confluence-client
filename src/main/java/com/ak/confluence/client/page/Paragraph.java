@@ -33,7 +33,7 @@ public class Paragraph extends PageElement {
 		return this;
 	}
 	@Override
-	public String toString(StringBuffer sb) {
+	protected String toString(StringBuffer sb) {
 		addStyleAttrib();
 		return super.toString(sb);
 	}

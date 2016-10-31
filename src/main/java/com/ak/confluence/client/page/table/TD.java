@@ -65,7 +65,7 @@ public class TD extends TableElement {
 		if(rowSpan>0) addAttrib("rowSpan", ""+rowSpan);
 	}
 	@Override
-	public String toString(StringBuffer sb) {
+	protected String toString(StringBuffer sb) {
 		addAttribs();
 		return super.toString(sb);
 	}
