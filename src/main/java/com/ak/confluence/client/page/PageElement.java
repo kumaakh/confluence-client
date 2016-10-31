@@ -32,12 +32,6 @@ public class PageElement {
 	{
 		return children;
 	}
-	/**
-	 * appends a new PageElement
-	 * @param c
-	 * @return itself
-	 * @throws Exception
-	 */
 	protected PageElement with(PageElement c)
 	{
 		children.add(c);
@@ -161,6 +155,12 @@ public class PageElement {
 	public TaskList addTaskList()
 	{
 		TaskList h = new TaskList();
+		with(h);
+		return h;
+	}
+	public Quote addQuote()
+	{
+		Quote h= new Quote();
 		with(h);
 		return h;
 	}

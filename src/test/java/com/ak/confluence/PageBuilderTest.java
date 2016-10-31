@@ -41,6 +41,7 @@ public class PageBuilderTest {
 		c.withHR().addBulletList().withItem(new Text("apples")).withItem(new Text("oranges")).withItem(new Text("mangoes"));
 		c.withHR().addNumberedList().withItem(new Text("apples")).withItem(new Text("oranges")).withItem(new Text("mangoes"));
 		c.withHR().addTaskList().withItem(new Text("task 1")).withItem(true,new Text("task 2")).addItem(false).addText("task 3");
+		c.withHR().addQuote().addPara().withText(new Text("some quoted text")).withBR().addText("some more quoted Text");
 		
 		return b;
 	}
