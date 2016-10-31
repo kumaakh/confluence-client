@@ -40,6 +40,7 @@ public class PageBuilderTest {
 		c.withHR().addPara().withLeftmargin(60).with(Alignment.CENTER). addText("indented and center aligned");
 		c.withHR().addBulletList().withItem(new Text("apples")).withItem(new Text("oranges")).withItem(new Text("mangoes"));
 		c.withHR().addNumberedList().withItem(new Text("apples")).withItem(new Text("oranges")).withItem(new Text("mangoes"));
+		c.withHR().addTaskList().withItem(new Text("task 1")).withItem(true,new Text("task 2")).addItem(false).addText("task 3");
 		
 		return b;
 	}

@@ -58,15 +58,15 @@ Usage of the confluence client can be seen from  ConflClientTest
   - Lists
     - Bullets
     - Number Lists
+    - Task Lists
   
 * All errors are published as HttpResponseExceptions with code and message 
 
 ## TBD
-* Tree of children
-* TOC
-* List of attachments
-* Task Lists
-
+* Macros
+	* Tree of children
+	* TOC
+	* List of attachments
 
 
  

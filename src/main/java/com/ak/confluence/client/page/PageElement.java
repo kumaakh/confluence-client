@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.ak.confluence.client.page.table.Table;
+import com.ak.confluence.client.page.wiki.TaskList;
 import com.ak.confluence.client.page.wiki.WikiImageLink;
 import com.ak.confluence.client.page.wiki.WikiLink;
 
@@ -154,6 +155,12 @@ public class PageElement {
 	public HList addNumberedList()
 	{
 		HList h = new HList(true);
+		with(h);
+		return h;
+	}
+	public TaskList addTaskList()
+	{
+		TaskList h = new TaskList();
 		with(h);
 		return h;
 	}
