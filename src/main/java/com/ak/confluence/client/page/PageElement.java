@@ -145,7 +145,18 @@ public class PageElement {
 		getChildren().add(h);
 		return h;
 	}
-	
+	public HList addBulletList()
+	{
+		HList h = new HList(false);
+		with(h);
+		return h;
+	}
+	public HList addNumberedList()
+	{
+		HList h = new HList(true);
+		with(h);
+		return h;
+	}
 	
 	//with methods should return this
 	public PageElement withBR()

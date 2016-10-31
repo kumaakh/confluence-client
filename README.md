@@ -55,8 +55,9 @@ Usage of the confluence client can be seen from  ConflClientTest
     - from web
     - with various properties
     - with advanced effects
-    
-  	
+  - Lists
+    - Bullets
+    - Number Lists
   
 * All errors are published as HttpResponseExceptions with code and message 
 
@@ -64,6 +65,8 @@ Usage of the confluence client can be seen from  ConflClientTest
 * Tree of children
 * TOC
 * List of attachments
+* Task Lists
+
 
 
  

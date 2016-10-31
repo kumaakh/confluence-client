@@ -38,6 +38,8 @@ public class PageBuilderTest {
 		c.withHR().addPara().with(Alignment.RIGHT).addText("right aligned");
 		c.withHR().addPara().withLeftmargin(60).addText("indented");
 		c.withHR().addPara().withLeftmargin(60).with(Alignment.CENTER). addText("indented and center aligned");
+		c.withHR().addBulletList().withItem(new Text("apples")).withItem(new Text("oranges")).withItem(new Text("mangoes"));
+		c.withHR().addNumberedList().withItem(new Text("apples")).withItem(new Text("oranges")).withItem(new Text("mangoes"));
 		
 		return b;
 	}
