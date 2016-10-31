@@ -11,7 +11,8 @@ public class Text extends Terminal {
 		STRIKE("s"),
 		SUPERSCRIPT("sup"),
 		SUBSCRIPT("sub"),
-		MONOSPACE("sub");
+		MONOSPACE("code"),
+		PRE("pre");
 		
 		Style(String tag){ 
 			this.tag=tag;
@@ -37,6 +38,7 @@ public class Text extends Terminal {
 	public Text superScript(){throw new IllegalAccessError();}
 	public Text subScript(){throw new IllegalAccessError();}
 	public Text monoSpace(){throw new IllegalAccessError();}
+	public Text preformatted(){throw new IllegalAccessError();}
 
 	
 	Color clr;
@@ -174,7 +176,10 @@ public class Text extends Terminal {
 		public Text monoSpace(){
 			return wrap(Style.MONOSPACE);
 		}
-
+		@Override
+		public Text preformatted(){
+			return wrap(Style.PRE);
+		}
 	}
 
 }

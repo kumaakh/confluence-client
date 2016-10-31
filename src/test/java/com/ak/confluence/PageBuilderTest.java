@@ -188,5 +188,6 @@ public class PageBuilderTest {
 		assertEquals(Text.create(v).bold().toString(),"<strong>text</strong>");
 		assertEquals(Text.create(v).bold().italic().toString(),"<em><strong>text</strong></em>");
 		assertEquals(Text.create(v).bold().italic().with(Color.RED).toString(),"<em><strong><span style='color:rgb(255,0,0);' >text</span></strong></em>");
+		assertEquals(Text.create(v).preformatted().toString(),"<pre>text</pre>");
 	}
 }
