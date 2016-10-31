@@ -1,6 +1,6 @@
 package com.ak.confluence.client.page;
 
-public class PageSection extends PageElement {
+public class PageSection extends AbsElement {
 	int cellCount;
 	public PageSection(int cellCount, boolean equal, boolean leftSidebar) throws Exception {
 		super("ac:layout-section");
